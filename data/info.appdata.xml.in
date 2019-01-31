@@ -10,7 +10,7 @@
     <p>Test your battery life</p>
   </description>
   <provides>
-    <binary>com.github.cassidyjames.ephemeral</binary>
+    <binary>com.github.cassidyjames.rundown</binary>
   </provides>
   <releases>
     <release version="1.0.0" date="2019-01-31">
@@ -21,7 +21,7 @@
   </releases>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/cassidyjames/ephemeral/master/data/screenshot@2x.png</image>
+      <image>https://raw.githubusercontent.com/cassidyjames/rundown/master/data/screenshot.png</image>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1">
