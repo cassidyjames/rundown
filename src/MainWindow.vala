@@ -39,17 +39,25 @@ public class MainWindow : Gtk.Window {
         header.show_close_button = true;
         header.has_subtitle = false;
 
-        // var paid_info_bar = new PaidInfoBar ();
-        // var native_info_bar = new NativeInfoBar ();
+        var label = new Gtk.Label ("Hello world");
 
         var grid = new Gtk.Grid ();
         grid.orientation = Gtk.Orientation.VERTICAL;
-        // grid.add (paid_info_bar);
-        // grid.add (native_info_bar);
-        grid.add (new Gtk.Label ("Hello world"));
+        grid.add (label);
 
         set_titlebar (header);
         add (grid);
+
+        int64 test_start = Rundown.settings.get_int64 ("test-start");
+        int64 test_end = Rundown.settings.get_int64 ("test-end");
+
+        if (
+            test_start > int64.MIN &&
+            test_end > int64.MIN
+        ) {
+            int test_length = (int) (test_end - test_start);
+            label.label = _("Last test: %s").printf (Granite.DateTime.seconds_to_time (test_length));
+        }
 
         show_all ();
     }

@@ -1,12 +1,12 @@
-# rundown
+# Rundown
 
-Test your battery life
+## Test your battery life
 
-Rundown runs a suite of tests on your machine simulating some concept of normal usage. Run them until your battery dies, then re-open Rundown to see the stats.
+Rundown runs a suite of tests on your machine simulating some concept of normal usage. Run it until your battery dies, then re-open Rundown to see the stats.
 
 Great for OEMs testing upcoming hardware or end users wondering how their battery should behave under normal circumstances.
 
-## Tests
+## Future Test Ideas
 
 - Play a video on repeat
 - Load certain web pages

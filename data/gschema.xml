@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
   <schema path="/com/github/cassidyjames/rundown/" id="com.github.cassidyjames.rundown">
-    <key name="foo" type="b">
-      <default>true</default>
-      <summary>Foo</summary>
-      <description>Nothing yet</description>
+    <key name="test-start" type="x">
+      <!-- int64 min -->
+      <default>-9223372036854775808</default>
+      <summary>Last test start</summary>
+      <description>The time (UNIX timestamp) the previous battery test began</description>
+    </key>
+    <key name="test-end" type="x">
+      <!-- int64 min -->
+      <default>-9223372036854775808</default>
+      <summary>Last test end</summary>
+      <description>The last time (UNIX timestamp) the previous battery test checked in</description>
     </key>
   </schema>
 </schemalist>
