@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Rundown
+GenericName=Battery tester
+Comment=Test your battery life
+Categories=Utility;
+Exec=com.github.cassidyjames.rundown
+Icon=com.github.cassidyjames.rundown
+Terminal=false
+Type=Application
+X-GNOME-Gettext-Domain=com.github.cassidyjames.rundown
+Keywords=battery;power;electricity;life;usage;charger;ac;adapter;plug;test;stats;
+

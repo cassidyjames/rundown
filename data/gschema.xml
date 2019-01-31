@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/com/github/cassidyjames/rundown/" id="com.github.cassidyjames.rundown">
+    <key name="foo" type="b">
+      <default>true</default>
+      <summary>Foo</summary>
+      <description>Nothing yet</description>
+    </key>
+  </schema>
+</schemalist>
+

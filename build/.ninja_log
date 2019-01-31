@@ -1,0 +1,12 @@
+# ninja log v5
+0	2	1548962439	as-resources.h	9436162766388d8d
+0	2	1548962439	as-resources.c	191dc118f002419f
+2	96	1548962439	com.github.cassidyjames.rundown@exe/meson-generated_.._as-resources.c.o	e1df46b14d006e20
+0	218	1548962439	data/com.github.cassidyjames.rundown.desktop	ac7e06aa77d62536
+0	225	1548962439	data/com.github.cassidyjames.rundown.appdata.xml	85154a101c40556b
+0	229	1548962439	com.github.cassidyjames.rundown@exe/src/Application.c	dea683fa67f9261e
+0	229	1548962439	com.github.cassidyjames.rundown@exe/src/MainWindow.c	dea683fa67f9261e
+229	392	1548962439	com.github.cassidyjames.rundown@exe/meson-generated_src_MainWindow.c.o	7751ca1c9b97b73f
+229	409	1548962439	com.github.cassidyjames.rundown@exe/meson-generated_src_Application.c.o	368977ea621a56c3
+409	467	1548962439	com.github.cassidyjames.rundown	a30495389b060272
+1	857	0	meson-install	9bd7faa9472bf40f
