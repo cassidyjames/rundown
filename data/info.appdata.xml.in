@@ -7,7 +7,8 @@
   <name>Rundown</name>
   <summary>Test your battery life</summary>
   <description>
-    <p>Test your battery life</p>
+    <p>Rundown runs a suite of tests on your machine simulating some concept of normal usage. Run them until your battery dies, then re-open Rundown to see the stats.</p>
+    <p>Great for OEMs testing upcoming hardware or end users wondering how their battery should behave under normal circumstances.</p>
   </description>
   <provides>
     <binary>com.github.cassidyjames.rundown</binary>
