@@ -13,13 +13,11 @@
   <summary xml:lang="en_CA">Test your battery life</summary>
   <summary xml:lang="en_AU">Test your battery life</summary>
   <description>
-    <p>Test your battery life</p>
-    <p xml:lang="en_GB">Test your battery life</p>
-    <p xml:lang="en_CA">Test your battery life</p>
-    <p xml:lang="en_AU">Test your battery life</p>
+    <p>Rundown runs a suite of tests on your machine simulating some concept of normal usage. Run them until your battery dies, then re-open Rundown to see the stats.</p>
+    <p>Great for OEMs testing upcoming hardware or end users wondering how their battery should behave under normal circumstances.</p>
   </description>
   <provides>
-    <binary>com.github.cassidyjames.ephemeral</binary>
+    <binary>com.github.cassidyjames.rundown</binary>
   </provides>
   <releases>
     <release version="1.0.0" date="2019-01-31">
@@ -33,7 +31,7 @@
   </releases>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/cassidyjames/ephemeral/master/data/screenshot@2x.png</image>
+      <image>https://raw.githubusercontent.com/cassidyjames/rundown/master/data/screenshot.png</image>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1">
