@@ -35,11 +35,14 @@ public class MainWindow : Gtk.Window {
     }
 
     construct {
-        get_style_context ().add_class ("rounded");
-        get_style_context ().add_class ("flat");
+        stick ();
+        set_keep_above (true);
+
+        var context = get_style_context ();
+        context.add_class ("rounded");
+        context.add_class ("flat");
 
         var header = new Gtk.HeaderBar ();
-        header.show_close_button = true;
         header.has_subtitle = false;
         header.get_style_context ().add_class ("default-decoration");
         header.get_style_context ().add_class ("flat");

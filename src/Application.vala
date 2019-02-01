@@ -44,14 +44,6 @@ public class Rundown : Gtk.Application {
     }
 
     protected override void activate () {
-        var quit_action = new SimpleAction ("quit", null);
-        add_action (quit_action);
-        set_accels_for_action ("app.quit", {"<Ctrl>Q"});
-
-        quit_action.activate.connect (() => {
-            quit ();
-        });
-
         Utils.Inhibitor.initialize (this);
 
         var app_window = new MainWindow (this);
