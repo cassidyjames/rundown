@@ -6,6 +6,13 @@ Rundown runs a suite of tests on your machine simulating some concept of normal 
 
 Great for OEMs testing upcoming hardware or end users wondering how their battery should behave under normal circumstances.
 
+## Ideal Flow
+
+1. Wait for battery to be charged (Once charged, copy current power-related settings to GSettings backups?)
+2. Instruct user to unplug the power
+3. Upon unplugging, inhibit and set standard brightness level
+4. Begin test
+
 ## Future Test Ideas
 
 - Play a video on repeat

@@ -20,14 +20,7 @@
 */
 
 public class Rundown : Gtk.Application {
-    // Once a month
-    public const int64 NOTICE_SECS = 60 * 60 * 24 * 30;
-    public const string DONATE_URL = "https://cassidyjames.com/pay";
-
     public static GLib.Settings settings;
-
-    public bool warn_native_for_session = true;
-    public bool warn_paid_for_session = true;
 
     public Rundown () {
         Object (
@@ -59,18 +52,7 @@ public class Rundown : Gtk.Application {
             quit ();
         });
 
-        var gtk_settings = Gtk.Settings.get_default ();
-        gtk_settings.gtk_application_prefer_dark_theme = true;
-
-        if (native ()) {
-            var provider = new Gtk.CssProvider ();
-            provider.load_from_resource ("/com/github/cassidyjames/rundown/Application.css");
-            Gtk.StyleContext.add_provider_for_screen (
-                Gdk.Screen.get_default (),
-                provider,
-                Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-            );
-        }
+        Utils.Inhibitor.initialize (this);
 
         var app_window = new MainWindow (this);
         app_window.show_all ();
@@ -79,36 +61,6 @@ public class Rundown : Gtk.Application {
     public static int main (string[] args) {
         var app = new Rundown ();
         return app.run (args);
-    }
-
-    public bool native () {
-        string os = "";
-        var file = File.new_for_path ("/etc/os-release");
-        try {
-            var map = new Gee.HashMap<string, string> ();
-            var stream = new DataInputStream (file.read ());
-            string line;
-            // Read lines until end of file (null) is reached
-            while ((line = stream.read_line (null)) != null) {
-                var component = line.split ("=", 2);
-                if (component.length == 2) {
-                    map[component[0]] = component[1].replace ("\"", "");
-                }
-            }
-
-            os = map["ID"];
-        } catch (GLib.Error e) {
-            critical ("Couldn't read /etc/os-release: %s", e.message);
-        }
-
-        string session = Environment.get_variable ("DESKTOP_SESSION");
-        string stylesheet = Gtk.Settings.get_default ().gtk_theme_name;
-
-        return (
-            os == "elementary" &&
-            session == "pantheon" &&
-            stylesheet == "elementary"
-        );
     }
 }
 

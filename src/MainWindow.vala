@@ -20,33 +20,56 @@
 */
 
 public class MainWindow : Gtk.Window {
+    private static Gtk.Stack stack { get; set; }
+    private static Gtk.Label timer_label { get; set; }
+
     public MainWindow (Gtk.Application application) {
         Object (
             application: application,
             border_width: 0,
             icon_name: Rundown.instance.application_id,
-            resizable: true,
+            resizable: false,
             title: "Rundown",
             window_position: Gtk.WindowPosition.CENTER
         );
     }
 
     construct {
-        default_height = 800;
-        default_width = 1280;
+        get_style_context ().add_class ("rounded");
+        get_style_context ().add_class ("flat");
 
         var header = new Gtk.HeaderBar ();
         header.show_close_button = true;
         header.has_subtitle = false;
+        header.get_style_context ().add_class ("default-decoration");
+        header.get_style_context ().add_class ("flat");
 
-        var label = new Gtk.Label ("Hello world");
+        timer_label = new Gtk.Label (null);
+
+        var results_label = new Gtk.Label (null);
+
+        var new_button = new Gtk.Button.with_label ("New Test");
+        new_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+
+        var results_grid = new Gtk.Grid ();
+        results_grid.orientation = Gtk.Orientation.VERTICAL;
+        results_grid.row_spacing = 6;
+        results_grid.margin_bottom = results_grid.margin_start = results_grid.margin_end = 12;
+        results_grid.add (results_label);
+        results_grid.add (new_button);
+
+        stack = new Gtk.Stack ();
+        stack.add_named (results_grid, "results");
+        stack.add_named (timer_label, "timer");
 
         var grid = new Gtk.Grid ();
         grid.orientation = Gtk.Orientation.VERTICAL;
-        grid.add (label);
+        grid.add (stack);
 
         set_titlebar (header);
         add (grid);
+
+        show_all ();
 
         int64 test_start = Rundown.settings.get_int64 ("test-start");
         int64 test_end = Rundown.settings.get_int64 ("test-end");
@@ -56,9 +79,38 @@ public class MainWindow : Gtk.Window {
             test_end > int64.MIN
         ) {
             int test_length = (int) (test_end - test_start);
-            label.label = _("Last test: %s").printf (Granite.DateTime.seconds_to_time (test_length));
+            results_label.label = _("Last test: %s").printf (Granite.DateTime.seconds_to_time (test_length));
+
+            stack.visible_child = results_grid;
+        } else {
+            new_test ();
         }
 
-        show_all ();
+        new_button.clicked.connect (() => {
+            new_test ();
+        });
+    }
+
+    private void new_test () {
+        Utils.Inhibitor.get_instance ().inhibit ("Spice-Up Presentation");
+
+        stack.visible_child_name = "timer";
+
+        Rundown.settings.set_int64 ("test-start", int64.MIN);
+        Rundown.settings.set_int64 ("test-end", int64.MIN);
+
+        int64 test_start = new DateTime.now_utc ().to_unix ();
+        Rundown.settings.set_int64 ("test-start", test_start);
+
+        Timeout.add (1000, () => {
+            int64 now = new DateTime.now_utc ().to_unix ();
+
+            Rundown.settings.set_int64 ("test-end", now);
+
+            int test_length = (int) (now - test_start);
+            timer_label.label = Granite.DateTime.seconds_to_time (test_length);
+
+            return true;
+        });
     }
 }
