@@ -17,11 +17,11 @@
 
 [DBus (name = "org.freedesktop.ScreenSaver")]
 private interface Utils.ScreenSaverIface : Object {
-    public abstract uint32 Inhibit (string app_name, string reason) throws Error;
-    public abstract void UnInhibit (uint32 cookie) throws Error;
+    public abstract uint32 inhibit (string app_name, string reason) throws Error;
+    public abstract void uninhibit (uint32 cookie) throws Error;
 }
 
-public class Utils.Inhibitor :  Object {
+public class Utils.Inhibitor : Object {
     private const string IFACE = "org.freedesktop.ScreenSaver";
     private const string IFACE_PATH = "/ScreenSaver";
 
@@ -59,8 +59,12 @@ public class Utils.Inhibitor :  Object {
         if (screensaver_iface != null && !inhibited) {
             try {
                 inhibited = true;
-                screensaver_inhibit_cookie = screensaver_iface.Inhibit (application.application_id, reason);
-                suspend_inhibit_cookie = application.inhibit (application.get_active_window (), Gtk.ApplicationInhibitFlags.SUSPEND, reason);
+                screensaver_inhibit_cookie = screensaver_iface.inhibit (application.application_id, reason);
+                suspend_inhibit_cookie = application.inhibit (
+                    application.get_active_window (),
+                    Gtk.ApplicationInhibitFlags.SUSPEND,
+                    reason
+                );
                 debug ("Inhibiting screen");
             } catch (Error e) {
                 warning ("Could not inhibit screen: %s", e.message);
@@ -73,7 +77,7 @@ public class Utils.Inhibitor :  Object {
 
         if (screensaver_iface != null && screensaver_inhibit_cookie != null) {
             try {
-                screensaver_iface.UnInhibit (screensaver_inhibit_cookie);
+                screensaver_iface.uninhibit (screensaver_inhibit_cookie);
                 application.uninhibit (suspend_inhibit_cookie);
                 screensaver_inhibit_cookie = null;
                 suspend_inhibit_cookie = null;
@@ -84,4 +88,3 @@ public class Utils.Inhibitor :  Object {
         }
     }
 }
-
