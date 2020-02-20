@@ -46,6 +46,7 @@ public class MainWindow : Gtk.Window {
 
         var header = new Gtk.HeaderBar ();
         header.has_subtitle = false;
+        header.show_close_button = true;
         header.get_style_context ().add_class ("default-decoration");
         header.get_style_context ().add_class ("flat");
 
@@ -84,14 +85,14 @@ public class MainWindow : Gtk.Window {
         int64 test_start = Rundown.settings.get_int64 ("test-start");
         int64 test_end = Rundown.settings.get_int64 ("test-end");
 
-        if (test_start > int64.MIN && test_end > int64.MIN) {
+        // if (test_start > int64.MIN && test_end > int64.MIN) {
             int test_length = (int) (test_end - test_start);
             results_label.label = _("Last test: %s").printf (Granite.DateTime.seconds_to_time (test_length));
 
             stack.visible_child = results_grid;
-        } else {
-            new_test ();
-        }
+        // } else {
+        //     new_test ();
+        // }
 
         new_button.clicked.connect (() => {
             new_test ();
@@ -100,6 +101,7 @@ public class MainWindow : Gtk.Window {
 
     private void new_test () {
         Utils.Inhibitor.get_instance ().inhibit ("Rundown battery life test");
+        deletable = false;
 
         stack.visible_child_name = "timer";
 
